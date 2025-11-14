@@ -17,7 +17,7 @@ import time
 
 
  
-def lowlight(image_path):
+def lowlight(image_path, output_path):
 	os.environ['CUDA_VISIBLE_DEVICES']='0'
 	data_lowlight = Image.open(image_path)
 
@@ -37,26 +37,19 @@ def lowlight(image_path):
 
 	end_time = (time.time() - start)
 	print(end_time)
-	image_path = image_path.replace('test_data','result')
-	result_path = image_path
-	if not os.path.exists(image_path.replace('/'+image_path.split("/")[-1],'')):
-		os.makedirs(image_path.replace('/'+image_path.split("/")[-1],''))
-
+	result_path = output_path
 	torchvision.utils.save_image(enhanced_image, result_path)
 
 if __name__ == '__main__':
-# test_images
-	with torch.no_grad():
-		filePath = 'data/test_data/'
-	
-		file_list = os.listdir(filePath)
+	import argparse
+    parser = argparse.ArgumentParser()
 
-		for file_name in file_list:
-			test_list = glob.glob(filePath+file_name+"/*") 
-			for image in test_list:
-				# image = image
-				print(image)
-				lowlight(image)
+    parser.add_argument('-i', '--input', required=True, type=str)
+    parser.add_argument('-o', '--output', required=True, type=str)
+
+    args = parser.parse_args()
+
+	lowlight(args.input, args.output)
 
 		
 
