@@ -16,12 +16,9 @@ import glob
 import time
 
 
- 
 def lowlight(image_path, output_path):
 	os.environ['CUDA_VISIBLE_DEVICES']='0'
 	data_lowlight = Image.open(image_path)
-
- 
 
 	data_lowlight = (np.asarray(data_lowlight)/255.0)
 
@@ -42,12 +39,12 @@ def lowlight(image_path, output_path):
 
 if __name__ == '__main__':
 	import argparse
-    parser = argparse.ArgumentParser()
+	parser = argparse.ArgumentParser()
 
-    parser.add_argument('-i', '--input', required=True, type=str)
-    parser.add_argument('-o', '--output', required=True, type=str)
+	parser.add_argument('-i', '--input', required=True, type=str)
+	parser.add_argument('-o', '--output', required=True, type=str)
 
-    args = parser.parse_args()
+	args = parser.parse_args()
 
 	lowlight(args.input, args.output)
 
