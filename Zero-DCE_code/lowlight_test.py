@@ -18,7 +18,7 @@ import time
 
 def lowlight(image_path, output_path):
 	os.environ['CUDA_VISIBLE_DEVICES']='0'
-	data_lowlight = Image.open(image_path)
+	data_lowlight = Image.open(image_path).convert("RGB")
 
 	data_lowlight = (np.asarray(data_lowlight)/255.0)
 
